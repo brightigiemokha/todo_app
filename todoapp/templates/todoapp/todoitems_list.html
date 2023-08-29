@@ -12,6 +12,7 @@
         <td>{{todoitems.title}}</td>
         <td><a href="{% url 'todo' todo.id }">View</a></td>
         <td><a href="{% url 'todo-update' todo.id }">Edit</a></td>
+        <td><a href="">Delete</a></td>
     </tr>
     {% empty %}
     <h3> Nothing to do </h3>
