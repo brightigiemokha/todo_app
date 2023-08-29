@@ -39,13 +39,17 @@ class TodoitemsDetail(LoginRequiredMixin, DetailView):
 
 class TodoitemsCreate(LoginRequiredMixin, CreateView):
     model = Todoitems
-    fields = '__all__'
+    fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('todoitemss')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(TodoitemsCreate, self).form_valid(form)
 
 
 class TodoitemsUpdate(LoginRequiredMixin, UpdateView):
     model = Todoitems
-    fields = '__all__'
+    fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('todoitemss')
 
 
