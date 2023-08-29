@@ -17,5 +17,5 @@ class TodoitemsDetail(DetailView):
 
 class TodoitemsCreate(CreateView):
     model = Todoitems
-    field = '__all__'
+    fields = '__all__'
     success_url = reverse_lazy('todos')
