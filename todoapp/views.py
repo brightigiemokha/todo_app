@@ -24,6 +24,12 @@ class TodoitemsList(LoginRequiredMixin, ListView):
     model = Todoitems
     todo_object_name = 'todoitemss'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['todoitemss'] = context['todoitemss'].filter(user=self.request.user)
+        context['count'] = context['todoitemss'].filter(complete=False).count()
+        return context
+
 
 class TodoitemsDetail(LoginRequiredMixin, DetailView):
     model = Todoitems
