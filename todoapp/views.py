@@ -5,7 +5,10 @@ from .models import Todoitems
 
 class TodoitemsList(ListView):
     model = Todoitems
-    todo_object_name = 'tasks'
+    todo_object_name = 'todo'
+
 
 class TodoitemsDetail(DetailView):
     model = Todoitems
+    context_object_name = 'todo'
+    template_name = 'todoapp/todo_detail.html'
