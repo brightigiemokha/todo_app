@@ -1,8 +1,8 @@
 {% if request.user.is_authenticated %}
     <p>{{request.user}}</p>
-    <a href=''>LogOut</a>
+    <a href="{% url 'logout' %}">LogOut</a>
 {% else %}
-    <a href=''>LogIn</a>
+    <a href="{% url 'login' %}">LogIn</a>
 {% endif %}
 
 <hr>
@@ -15,7 +15,7 @@
         <th></th>
         <th></th>
     </tr>
-    {% for todoitems in tasks %}
+    {% for todo in todoitemss %}
     <tr>
         <td>{{todoitems.title}}</td>
         <td><a href="{% url 'todo' todo.id }">View</a></td>

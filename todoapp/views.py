@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView,
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from django.contrib.auth.views import LoginView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Todoitems
 
@@ -15,32 +17,33 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy('todos')
+        return reverse_lazy('todoitemss')
+        
 
-class TodoitemsList(ListView):
+class TodoitemsList(LoginRequiredMixin, ListView):
     model = Todoitems
-    todo_object_name = 'todos'
+    todo_object_name = 'todoitemss'
 
 
-class TodoitemsDetail(DetailView):
+class TodoitemsDetail(LoginRequiredMixin, DetailView):
     model = Todoitems
     context_object_name = 'todo'
     template_name = 'todoapp/todo_detail.html'
 
 
-class TodoitemsCreate(CreateView):
+class TodoitemsCreate(LoginRequiredMixin, CreateView):
     model = Todoitems
     fields = '__all__'
-    success_url = reverse_lazy('todos')
+    success_url = reverse_lazy('todoitemss')
 
 
-class TodoitemsUpdate(UpdateView):
+class TodoitemsUpdate(LoginRequiredMixin, UpdateView):
     model = Todoitems
     fields = '__all__'
-    success_url = reverse_lazy('todos')
+    success_url = reverse_lazy('todoitemss')
 
 
-class DeleteView(DeleteView):
+class DeleteView(LoginRequiredMixin, DeleteView):
     model = Todoitems
     context_object_name = 'todo'
-    success_url = reverse_lazy('todos')
+    success_url = reverse_lazy('todoitemss')
